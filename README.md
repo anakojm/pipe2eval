@@ -1,5 +1,7 @@
 # pipe2eval
 
+I Hijacked it to make it work like a markdown notebook for python (in french)
+
 simple REPL inside vim
 
 supports: python, php, coffee, mysql, mongodb, redis, sh, go, javascript, ruby, elixir ...
