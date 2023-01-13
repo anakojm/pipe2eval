@@ -1,6 +1,10 @@
-# pipe2eval
+J'ai détourné pipe2eval pour que le plugin fonctionne comme un "notebook" pour Python avec Markdown, [https://github.com/baruchel/vim-notebook](https://github.com/baruchel/vim-notebook) ne fonctionnant pas/plus.
 
-I Hijacked it to make it work like a markdown notebook for python (in french)
+![showcase](https://gist.github.com/anakojm/f6ef6eba4160d95a59cfa3d500244051/raw/f2b20f9ea90f0606266583930a1246efc2dbd65b/showcase.gif)
+
+---
+
+# pipe2eval
 
 simple REPL inside vim
 
