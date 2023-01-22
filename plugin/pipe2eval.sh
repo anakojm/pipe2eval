@@ -352,6 +352,33 @@ markdown_merge(){
 	cat "$TMP_FILE.new" >> $TMP_FILE;
 }
 
+# neorg ------------------------------------------------------------------------
+
+norg_reset(){
+	echo 'import pprint' > $TMP_FILE
+}
+
+norg_eval(){
+	tail -1 $TMP_FILE.new | grep -q '^\s*\(return\|import\|from\)'
+
+	if [ $? -eq 0 ]; then
+		cat $TMP_FILE $TMP_FILE.new | python3 - 2> $TMP_FILE.error |\
+			sed -z 's/^\(.*\)$/@end\nRenvoie :\n@code python\n\1@end/'|\
+      sed -e '/^None$/d'
+	else
+		cat $TMP_FILE $TMP_FILE.new | sed -e '/^$/d' |\
+			sed '$ s/^[^ \t].*$/____ =&\
+\pprint.pprint(____)\
+\____/' | python3 - 2> $TMP_FILE.error |\
+			sed -z 's/^\(.*\)$/@end\nRenvoie :\n@code python\n\1/'|\
+      sed -e '/^None$/d' 
+	fi
+}
+
+norg_merge(){
+	cat "$TMP_FILE.new" >> $TMP_FILE;
+}
+
 # mongo ------------------------------------------------------------------------
 
 mongo_exec(){
