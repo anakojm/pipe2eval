@@ -5,6 +5,7 @@
 
 INPUT_LANG=$1
 INPUT_FILE="$2"
+returns="$3"
 
 if [ -z "$PIP2EVAL_TMP_FILE_PATH" ]; then
 	PIP2EVAL_TMP_FILE_PATH=/dev/shm/
@@ -336,14 +337,14 @@ markdown_eval(){
 
 	if [ $? -eq 0 ]; then
 		cat $TMP_FILE $TMP_FILE.new | python3 - 2> $TMP_FILE.error |\
-			sed -z 's/^\(.*\)$/```\nRenvoie :\n```python\n\1```/'|\
+			sed -z "s/^\(.*\)$/\`\`\`\n${returns}\n\`\`\`python\n\1\`\`\`/"|\
       sed -e '/^None$/d'
 	else
 		cat $TMP_FILE $TMP_FILE.new | sed -e '/^$/d' |\
 			sed '$ s/^[^ \t].*$/____ =&\
 \pprint.pprint(____)\
 \____/' | python3 - 2> $TMP_FILE.error |\
-			sed -z 's/^\(.*\)$/```\nRenvoie :\n```python\n\1/'|\
+			sed -z "s/^\(.*\)$/\`\`\`\n${returns}\n\`\`\`python\n\1/"|\
       sed -e '/^None$/d' 
 	fi
 }
@@ -363,14 +364,14 @@ norg_eval(){
 
 	if [ $? -eq 0 ]; then
 		cat $TMP_FILE $TMP_FILE.new | python3 - 2> $TMP_FILE.error |\
-			sed -z 's/^\(.*\)$/@end\nRenvoie :\n@code python\n\1@end/'|\
+			sed -z "s/^\(.*\)$/@end\n${returns}\n@code python\n\1@end/"|\
       sed -e '/^None$/d'
 	else
 		cat $TMP_FILE $TMP_FILE.new | sed -e '/^$/d' |\
 			sed '$ s/^[^ \t].*$/____ =&\
 \pprint.pprint(____)\
 \____/' | python3 - 2> $TMP_FILE.error |\
-			sed -z 's/^\(.*\)$/@end\nRenvoie :\n@code python\n\1/'|\
+			sed -z "s/^\(.*\)$/@end\n${returns}\n@code python\n\1/"|\
       sed -e '/^None$/d' 
 	fi
 }

@@ -1,6 +1,8 @@
-J'ai détourné pipe2eval pour que le plugin fonctionne comme un "notebook" pour Python avec Markdown et Neorg, [https://github.com/baruchel/vim-notebook](https://github.com/baruchel/vim-notebook) ne fonctionnant pas/plus.
+I hijacked pipe2eval to make it work as a "notebook" for Python with Markdown and Neorg, since [https://github.com/baruchel/vim-notebook](https://github.com/baruchel/vim-notebook) is not working.
 
-![showcase](https://gist.github.com/anakojm/f6ef6eba4160d95a59cfa3d500244051/raw/f2b20f9ea90f0606266583930a1246efc2dbd65b/showcase.gif)
+![showcase](https://gist.githubusercontent.com/anakojm/f6ef6eba4160d95a59cfa3d500244051/raw/6824c541477c21d13e9381174cb55353b657eeed/showcase.gif)
+
+You can configure the text between the code and it’s output with the `g:pipe2eval_return_word` variable.
 
 ---
 
